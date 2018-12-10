@@ -808,7 +808,7 @@ namespace {
     // If we have a specialized evaluation function for the current material
     // configuration, call it and return.
     if (me->specialized_eval_exists())
-        return me->evaluate(pos);
+        return -me->evaluate(pos);
 
     // Initialize score by reading the incrementally updated scores included in
     // the position object (material + piece square tables) and the material
@@ -822,7 +822,7 @@ namespace {
     // Early exit if score is high
     Value v = (mg_value(score) + eg_value(score)) / 2;
     if (abs(v) > LazyThreshold)
-       return pos.side_to_move() == WHITE ? v : -v;
+       return pos.side_to_move() == WHITE ? -v : v;
 
     // Main evaluation begins here
 
